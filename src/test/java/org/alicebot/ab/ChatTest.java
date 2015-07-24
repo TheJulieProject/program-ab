@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.containsString;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -94,7 +94,10 @@ public class ChatTest {
 
            // CBC 2001
         //  {"How is it going?","xxx"},
-            {"How old are you?","1 years old"},
+            {"How old are you?",String.format(
+            	"%d years old",
+            	(new Date().getTime() - 1349755200000l) / 31557600000l
+            )},
             {"Are you male or female?","female"},
             {"What is your favorite color?","green"},
             {"Are you a bot?","robot"},
@@ -147,7 +150,7 @@ public class ChatTest {
             {"Is it morning, noon, or night?","It is"},
             {"What month of the year is it?","July"},
     //      {"What day will it be tomorrow?","xxx"},
-            {"What year will it be next year","2015"},
+            {"What year will it be next year",String.valueOf(Calendar.getInstance().get(Calendar.YEAR) + 1)},
             {"What would I use a hammer for?","to hit nails"},
             {"What would I do with a screwdriver?","to tighten screws"},
             {"Of what use is a taxi","transport us"},
@@ -162,7 +165,6 @@ public class ChatTest {
             {"Do you know what game Harold likes to play?","tennis"},
             // 2009 Questions
             {"What is the Loebner Prize?","The Loebner Prize is an annual Turing Test sponsored by Hugh Loebner."},
-            {"How old are you?","I am 1 years old"},
             {"What color is a green ball?","green"},
       //    {"Do you like cake?","Just keep me charged up."},
             {"what is 6 plus 7?","13"},
@@ -223,10 +225,9 @@ public class ChatTest {
             {"What would I do with a screwdriver?","to tighten screws"},
             {"How many letters are in the word 'banana'?","6 letters"},
             {"Have you watched a good film lately?","Right now my favorite movie is"},
-            {"What year will it be next year","2015"},
             {"What's your favorite fruit?","Apple"},
          // {"Do you prefer white or black coffee?","xxx"},
-            {"How old are you?","I am 1 years old"},
+            //{"How old are you?","I am 1 years old"},
             {"The football was kicked by Fred. Who kicked the football?","Fred"},
 
             // 2012 Questions
