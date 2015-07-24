@@ -84,7 +84,7 @@ public class Main {
         else if (action.equals("abwq")){AB ab = new AB(bot, TestAB.sample_file);  ab.abwq();}
 		else if (action.equals("test")) { TestAB.runTests(bot, MagicBooleans.trace_mode);     }
         else if (action.equals("shadow")) { MagicBooleans.trace_mode = false; bot.shadowChecker();}
-        else if (action.equals("iqtest")) { ChatTest ct = new ChatTest(bot);
+        else if (action.equals("iqtest")) { ChatTest ct = new ChatTest().initialize(bot);
                 try {
                     ct.testMultisentenceRespond();
                 }

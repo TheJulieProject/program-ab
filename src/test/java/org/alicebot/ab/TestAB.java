@@ -26,7 +26,7 @@ public class TestAB {
             }
             else if (textLine.equals("sc")) sraixCache("c:/ab/data/sraixdata6.txt", chatSession);
             else if (textLine.equals("iqtest")) {
-                ChatTest ct = new ChatTest(bot);
+                ChatTest ct = new ChatTest().initialize(bot);
                 try {
                     ct.testMultisentenceRespond();
                 }

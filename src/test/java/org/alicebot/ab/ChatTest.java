@@ -1,9 +1,15 @@
 package org.alicebot.ab;
 
-import junit.framework.Assert;
-import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class ChatTest {
     Bot bot;
@@ -56,7 +62,10 @@ public class ChatTest {
             {"my friend John threw a ball","For fun?"},
             {"what did John do", "threw a ball"},
             {"who threw a ball","John"},
-            {"my birthday is January 2nd 1970","44 years old"},
+            {"my birthday is January 2nd 1970",String.format(
+            		"%d years old",
+                	(new Date().getTime() - 86400000l) / 31557600000l
+            )},
 
             {"Jane was in a car for 14 hours.","Can you tell me why she was it?"},
             {"who was in a car for 14 hours?","Jane"},
@@ -262,17 +271,20 @@ public class ChatTest {
 
 
     };
-
-
-    public ChatTest (Bot bot) {
-        super();
+    public ChatTest initialize(Bot bot) {
         this.bot = bot;
         this.chatSession = new Chat(bot);
+        return this;
     }
-
+    @Before
+    public void setChatBotRoot() throws IOException {
+    	MagicStrings.setRootPath(new File(".").getCanonicalPath());
+    	
+    }
     @Test
     public void testMultisentenceRespond() throws Exception {
-
+    	Bot bot = new Bot("alice2", MagicStrings.root_path, "test");
+    	this.initialize(bot);
         for (int i = 0; i < pairs.length; i++) {
             String request = pairs[i][0];
             String expected = pairs[i][1];
@@ -280,5 +292,6 @@ public class ChatTest {
             assertThat(actual, containsString(expected));
         }
         System.out.println("Passed "+pairs.length+" test cases.");
+        
     }
 }
